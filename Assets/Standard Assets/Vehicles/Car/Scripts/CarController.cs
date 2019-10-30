@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -18,6 +19,8 @@ namespace UnityStandardAssets.Vehicles.Car
 
     public class CarController : MonoBehaviour
     {
+        public static CarController Instance;
+
         [SerializeField] private CarDriveType m_CarDriveType = CarDriveType.FourWheelDrive;
         [SerializeField] private WheelCollider[] m_WheelColliders = new WheelCollider[4];
         [SerializeField] private GameObject[] m_WheelMeshes = new GameObject[4];
@@ -54,6 +57,21 @@ namespace UnityStandardAssets.Vehicles.Car
         public float MaxSpeed{get { return m_Topspeed; }}
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
+       
+
+        public Text text;
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(this);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
         // Use this for initialization
         private void Start()
@@ -69,6 +87,15 @@ namespace UnityStandardAssets.Vehicles.Car
 
             m_Rigidbody = GetComponent<Rigidbody>();
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
+
+            
+            
+                // text = GameObject.FindGameObjectWithTag("Canvas").gameObject.GetComponentInChildren<Text>();
+                //text.text = "!!!";
+
+
+            // GetComponent<Text>().text = m_Rigidbody.velocity.ToString();
+            
         }
 
 
@@ -171,10 +198,10 @@ namespace UnityStandardAssets.Vehicles.Car
             TractionControl();
         }
 
-
-        private void CapSpeed()
+       // float speed;
+        public void CapSpeed()
         {
-            float speed = m_Rigidbody.velocity.magnitude;
+            float  speed = m_Rigidbody.velocity.magnitude;
             switch (m_SpeedType)
             {
                 case SpeedType.MPH:
@@ -191,8 +218,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     break;
             }
         }
-
-
+        
         private void ApplyDrive(float accel, float footbrake)
         {
 
