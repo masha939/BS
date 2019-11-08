@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: "Assets/\u043C\u0430\u0448\u0430/Fantasy Forest Environment Free Sample/Scenes/demoScene_free.unity"
+    guid: 7769f33fb4fa2e5458344a36556ad760
+  - enabled: 1
+    path: Assets/Scenes/Car1.unity
+    guid: 41b8fdb98491fab48a0cd641d4c0e3b1
+  - enabled: 1
+    path: Assets/csena2/scene1-night.unity
+    guid: 19333f7b4eb3259429d8674904f1a3b5
   m_configObjects: {}
